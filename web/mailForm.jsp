@@ -6,11 +6,16 @@
 </head>
 <body>
 <%@include file="nav.jspf"%>
-<form action = "Controller" method = "GET">
-    email <input type = "text" name = "email">
-    <input type="hidden" value="sendMail" name="action">
-    <input type = "submit" value = "Send mail" />
-</form>
+<div class="container">
+    <form action = "Controller" method = "GET">
+        <div class="form-group">
+            <label for="email">email</label>
+            <input type = "text" name = "email" id="email" class="form-control">
+        </div>
+        <input type="hidden" value="sendMail" name="action">
+        <input type = "submit" value = "Send mail" class="btn btn-default"/>
+    </form>
+</div>
 <%@include file="import.jspf"%>
 </body>
 </html>

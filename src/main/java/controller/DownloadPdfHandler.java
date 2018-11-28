@@ -4,6 +4,7 @@ import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.pdf.codec.Base64;
 import db.ImageRepositoryInMemory;
+import db.Service;
 import org.w3c.dom.DocumentFragment;
 import util.Pdf;
 
@@ -13,8 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 
 public class DownloadPdfHandler extends AbstractRequestHandler {
-    public DownloadPdfHandler(ImageRepositoryInMemory imageRepo) {
-        super(imageRepo);
+    public DownloadPdfHandler(Service service) {
+        super(service);
     }
 
     @Override
@@ -22,7 +23,7 @@ public class DownloadPdfHandler extends AbstractRequestHandler {
         final int ARBITARY_SIZE = 1048;
         Document pdfFile = null;
         try {
-            pdfFile = Pdf.generateFile();
+            pdfFile = Pdf.generateFile(service.getAllPersons());
         } catch (DocumentException e) {
             e.printStackTrace();
         }

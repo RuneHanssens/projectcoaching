@@ -1,26 +1,27 @@
 package controller;
 
 import db.ImageRepositoryInMemory;
+import db.Service;
 
 public class HandlerFactory {
-    public static AbstractRequestHandler getHandler(String action, ImageRepositoryInMemory imageRepo){
+    public static AbstractRequestHandler getHandler(String action, Service service){
         switch (action){
             case "getMailForm":
-                return new GetMailFormHandler(imageRepo);
+                return new GetMailFormHandler(service);
             case "sendMail":
-                return new SendMailHandler(imageRepo);
+                return new SendMailHandler(service);
             case "downloadPdf":
-                return new DownloadPdfHandler(imageRepo);
+                return new DownloadPdfHandler(service);
             case "getImagePage":
-                return new GetImagePageHandler(imageRepo);
+                return new GetImagePageHandler(service);
             case "uploadImage":
-                return new UploadImageHandler(imageRepo);
+                return new UploadImageHandler(service);
             case "downloadImage":
-                return new DownloadImageHandler(imageRepo);
+                return new DownloadImageHandler(service);
             case "getFilesPage":
-                return new GetFilesPageHandler(imageRepo);
+                return new GetFilesPageHandler(service);
             case "downloadExcel":
-                return new DownloadExcelHandler(imageRepo);
+                return new DownloadExcelHandler(service);
         }
         return null;
     }

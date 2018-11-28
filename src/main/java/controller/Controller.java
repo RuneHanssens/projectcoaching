@@ -1,6 +1,7 @@
 package controller;
 
 import db.ImageRepositoryInMemory;
+import db.Service;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -10,10 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 
 @MultipartConfig
 public class Controller extends javax.servlet.http.HttpServlet {
-    private ImageRepositoryInMemory imageRepo;
+    private Service service;
 
     public Controller() {
-        this.imageRepo = new ImageRepositoryInMemory();
+        service = new Service();
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws javax.servlet.ServletException, IOException {
@@ -31,7 +32,7 @@ public class Controller extends javax.servlet.http.HttpServlet {
             request.getRequestDispatcher("/index.jsp").forward(request, response);
         }else{
             System.out.println("Action: " + action);
-            HandlerFactory.getHandler(action, imageRepo).handleRequest(request,response);
+            HandlerFactory.getHandler(action, service).handleRequest(request,response);
         }
     }
 }

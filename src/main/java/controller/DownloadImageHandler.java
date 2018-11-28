@@ -1,6 +1,7 @@
 package controller;
 
 import db.ImageRepositoryInMemory;
+import db.Service;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -13,14 +14,15 @@ import java.io.OutputStream;
 
 public class DownloadImageHandler extends AbstractRequestHandler{
 
-    public DownloadImageHandler(ImageRepositoryInMemory imageRepo) {
-        super(imageRepo);
+    public DownloadImageHandler(Service service) {
+        super(service);
     }
 
     @Override
     public void handleRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String key = (String)request.getParameter("key");
-        String path = "D:/School/5/Coaching/ProjectCoach/web/uploads/" + key;
+        //String path = "D:/School/5/Coaching/ProjectCoach/web/uploads/" + key;
+        String path = request.getServletContext().getRealPath("\\uploads\\" + key);
         ServletContext context = request.getServletContext();
         String mimeType = context.getMimeType(path);
         File downloadFile = new File(path);

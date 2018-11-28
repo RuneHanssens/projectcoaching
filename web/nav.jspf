@@ -2,13 +2,13 @@
     <h1>Bootstrap</h1>
     <p>Demo for projectcoaching!</p>
 </div>
-<nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+<nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top" style="margin-bottom: 20px;">
     <button class="navbar-toggler" data-toggle="collapse" data-target="#collapse_target">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="collapse_target">
         <a class="navbar-brand" href="#"><img class="img-fluid" src="/images/ucll_logo.png" style="width: 85px; height: auto;"></a>
-        <span class="navbar-text">Bootstrap Demo</span>
+        <span class="navbar-text" style="font-weight: bold; margin-right: 20px;">Bootstrap Demo</span>
         <ul class="navbar-nav">
             <li class="nav-item">
                 <a class="nav-link" href="/Controller">Home</a>

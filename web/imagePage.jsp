@@ -21,11 +21,15 @@
         </c:forEach>
     </div>
 </div>
-<form action="Controller?action=uploadImage" method="post" enctype="multipart/form-data">
-    <input type="hidden" value="uploadImage" name="action"/>
-    <input type="file" name="file"/>
-    <input type="submit" value="upload"/>
-</form>
+<div class="container">
+    <form action="Controller?action=uploadImage" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <input type="file" name="file"/>
+        </div>
+        <input type="submit" value="upload" class="btn btn-default"/>
+    </form>
+</div>
+
 <%@include file="import.jspf" %>
 </body>
 </html>

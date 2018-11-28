@@ -2,27 +2,21 @@ package util;
 
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfWriter;
+import domain.Person;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 
 public class Pdf {
-    public static Document generateFile() throws FileNotFoundException, DocumentException {
-        ArrayList<String> persons = new ArrayList<>();
-        persons.add("A");
-        persons.add("B");
-        persons.add("C");
-        persons.add("D");
-        persons.add("E");
+    public static Document generateFile(ArrayList<Person> persons) throws FileNotFoundException, DocumentException {
         Document document = new Document();
         PdfWriter.getInstance(document, new FileOutputStream("Hello.pdf"));
         document.open();
         Font font = FontFactory.getFont(FontFactory.COURIER, 16, BaseColor.BLACK);
-        for (String name:persons) {
-            Chunk chunk = new Chunk(name, font);
-            chunk.append("\n ");
-            document.add(chunk);
+        for (Person person:persons) {
+            Paragraph paragraph = new Paragraph(person.getName() + ", " + person.getrNumber() + ", " + person.getGithubUrl(),font);
+            document.add(paragraph);
             Chunk newLine = Chunk.NEWLINE;
             document.add(newLine);
         }

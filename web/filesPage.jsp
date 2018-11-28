@@ -6,8 +6,11 @@
 </head>
 <body>
 <%@include file="nav.jspf"%>
-<a href="/Controller?action=downloadPdf">Download pdf</a>
-<a href="/Controller?action=downloadExcel">Download excel</a>
+<div class="container">
+    <a href="/Controller?action=downloadPdf" class="btn btn-outline-danger">Download pdf</a>
+    <a href="/Controller?action=downloadExcel&type=1" class="btn btn-outline-danger">Download excel xlsx</a>
+    <a href="/Controller?action=downloadExcel&type=2" class="btn btn-outline-danger">Download excel xls</a>
+</div>
 <%@include file="import.jspf"%>
 </body>
 </html>

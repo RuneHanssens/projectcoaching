@@ -9,40 +9,18 @@ import java.util.HashMap;
 import java.util.List;
 
 public class ImageRepositoryInMemory {
-    private HashMap<String, BufferedImage> images;
+    private ArrayList<String> images;
 
     public ImageRepositoryInMemory() {
-        images = new HashMap<>();
+        images = new ArrayList<>();
     }
 
-    public BufferedImage getImage(String key){
-        return images.get(key);
-    }
 
-    public void addImage(String key, BufferedImage image){
-        images.put(key,image);
-        File file = new File("src/main/resources/uploadedImages/"+ key);
-        try {
-            ImageIO.write(image, "jpg", file);
-            System.out.println("image saved");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public List<BufferedImage> getAll(){
-        ArrayList<BufferedImage> result = new ArrayList<>();
-        for (BufferedImage image: images.values()) {
-            result.add(image);
-        }
-        return result;
+    public void addImage(String key){
+        images.add(key);
     }
 
     public List<String> getAllKeys(){
-        ArrayList<String> result = new ArrayList<>();
-        for (String key: images.keySet()){
-            result.add(key);
-        }
-        return result;
+        return images;
     }
 }

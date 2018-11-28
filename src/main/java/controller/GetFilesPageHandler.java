@@ -1,6 +1,7 @@
 package controller;
 
 import db.ImageRepositoryInMemory;
+import db.Service;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -9,8 +10,8 @@ import java.io.IOException;
 
 public class GetFilesPageHandler extends AbstractRequestHandler {
 
-    public GetFilesPageHandler(ImageRepositoryInMemory imageRepo) {
-        super(imageRepo);
+    public GetFilesPageHandler(Service service) {
+        super(service);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package controller;
 
 import db.ImageRepositoryInMemory;
+import db.Service;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -12,14 +13,15 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 public class UploadImageHandler extends AbstractRequestHandler{
-    public UploadImageHandler(ImageRepositoryInMemory imageRepo) {
-        super(imageRepo);
+    public UploadImageHandler(Service service) {
+        super(service);
     }
 
     @Override
     public void handleRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        File uploads = new File("D:\\School\\5\\Coaching\\ProjectCoach\\web\\uploads\\");
-
+        System.out.println("CONTEXT:" + request.getServletContext().getRealPath("/web/uploads"));
+        //File uploads = new File("D:\\School\\5\\Coaching\\ProjectCoach\\web\\uploads\\");
+        File uploads = new File(request.getServletContext().getRealPath("\\uploads\\"));
         Part filePart = request.getPart("file");
         String fileName = getSubmittedFileName(filePart);
         File file = new File(uploads, fileName);
@@ -27,7 +29,7 @@ public class UploadImageHandler extends AbstractRequestHandler{
         try (InputStream input = filePart.getInputStream()) {
             Files.copy(input, file.toPath());
             //TODO refactor db (empty img)
-            imageRepo.addImage(fileName, new BufferedImage(10,10,BufferedImage.TYPE_INT_ARGB));
+            service.addImage(fileName);
         }catch (Exception e){
             System.out.println(e.getMessage());
         }
