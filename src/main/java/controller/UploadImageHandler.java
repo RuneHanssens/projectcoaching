@@ -19,16 +19,15 @@ public class UploadImageHandler extends AbstractRequestHandler{
 
     @Override
     public void handleRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("CONTEXT:" + request.getServletContext().getRealPath("/web/uploads"));
         //File uploads = new File("D:\\School\\5\\Coaching\\ProjectCoach\\web\\uploads\\");
-        File uploads = new File(request.getServletContext().getRealPath("\\uploads\\"));
+        //File uploads = new File(request.getServletContext().getRealPath("\\uploads\\"));
         Part filePart = request.getPart("file");
         String fileName = getSubmittedFileName(filePart);
-        File file = new File(uploads, fileName);
+        //File file = new File(uploads, fileName);
+        File file = new File(fileName);
 
         try (InputStream input = filePart.getInputStream()) {
             Files.copy(input, file.toPath());
-            //TODO refactor db (empty img)
             service.addImage(fileName);
         }catch (Exception e){
             System.out.println(e.getMessage());

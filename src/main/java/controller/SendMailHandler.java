@@ -16,5 +16,6 @@ public class SendMailHandler extends AbstractRequestHandler {
 
     public void handleRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Mail.send(request.getParameter("email"));
+        response.sendRedirect("Controller?action=getMailForm");
     }
 }

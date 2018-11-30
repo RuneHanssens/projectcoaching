@@ -10,7 +10,7 @@
     <form action = "Controller" method = "GET">
         <div class="form-group">
             <label for="email">email</label>
-            <input type = "text" name = "email" id="email" class="form-control">
+            <input type = "text" name = "email" id="email" class="form-control" placeholder="Enter your email here...">
         </div>
         <input type="hidden" value="sendMail" name="action">
         <input type = "submit" value = "Send mail" class="btn btn-default"/>

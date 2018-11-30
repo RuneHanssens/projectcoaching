@@ -5,6 +5,7 @@
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
           <element id="module-output" name="ProjectCoach" />
+          <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/apache/pdfbox/pdfbox/2.0.12/pdfbox-2.0.12.jar" path-in-jar="/" />
         </element>
         <element id="directory" name="lib">
           <element id="library" level="project" name="Maven: com.itextpdf:itextpdf:5.5.10" />
@@ -22,6 +23,8 @@
           <element id="library" level="project" name="Maven: stax:stax-api:1.0.1" />
           <element id="library" level="project" name="Maven: javax.mail:mail:1.4" />
           <element id="library" level="project" name="Maven: javax.activation:activation:1.1.1" />
+          <element id="library" level="project" name="Maven: org.apache.pdfbox:fontbox:2.0.12" />
+          <element id="library" level="project" name="Maven: org.apache.pdfbox:pdfbox:2.0.12" />
         </element>
       </element>
       <element id="javaee-facet-resources" facet="ProjectCoach/web/Web" />

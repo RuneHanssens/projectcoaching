@@ -1,17 +1,19 @@
 package controller;
 
-import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
-import db.ImageRepositoryInMemory;
 import db.Service;
+import domain.Person;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
-import util.Excel;
-import util.Pdf;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.util.ArrayList;
 
 public class DownloadExcelHandler extends AbstractRequestHandler{
 
@@ -30,52 +32,35 @@ public class DownloadExcelHandler extends AbstractRequestHandler{
     }
 
     private void handleXLSX(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        System.out.println("type1");
-        final int ARBITARY_SIZE = 1048;
-        Workbook excelFile = null;
-        try {
-            excelFile = Excel.generateXLSX(service.getAllPersons());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-        response.addHeader("Content-Disposition", "attachment; filename=helloWorld.xlsx");
-
-
-        try(InputStream in = new FileInputStream("helloWorldXLSX.xlsx");
-            OutputStream out = response.getOutputStream()) {
-
-            byte[] buffer = new byte[ARBITARY_SIZE];
-
-            int numBytesRead;
-            while ((numBytesRead = in.read(buffer)) > 0) {
-                out.write(buffer, 0, numBytesRead);
-            }
-        }
+        response.addHeader("Content-Disposition", "attachment; filename=names.xlsx");
+        Workbook workbook = new XSSFWorkbook();
+        Sheet sheet = workbook.createSheet();
+        writeNames(sheet);
+        workbook.write(response.getOutputStream());
+        workbook.close();
     }
 
     private void handleXLS(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        System.out.println("type2");
-        final int ARBITARY_SIZE = 1048;
-        Workbook excelFile = null;
-        try {
-            excelFile = Excel.generateXLS(service.getAllPersons());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         response.setContentType("application/vnd.ms-excel");
-        response.addHeader("Content-Disposition", "attachment; filename=helloWorldXLS.xls");
+        response.setHeader("Content-Disposition", "attachment; filename=names.xls");
+        HSSFWorkbook workbook = new HSSFWorkbook();
+        Sheet sheet = workbook.createSheet();
+        writeNames(sheet);
+        workbook.write(response.getOutputStream());
+        workbook.close();
+    }
 
-
-        try(InputStream in = new FileInputStream("helloWorldXLS.xls");
-            OutputStream out = response.getOutputStream()) {
-
-            byte[] buffer = new byte[ARBITARY_SIZE];
-
-            int numBytesRead;
-            while ((numBytesRead = in.read(buffer)) > 0) {
-                out.write(buffer, 0, numBytesRead);
-            }
+    private void writeNames(Sheet sheet){
+        ArrayList<Person> persons = service.getAllPersons();
+        for (Integer i =0; i<persons.size(); i++) {
+            Row row = sheet.createRow(i);
+            Cell cell = row.createCell(0);
+            cell.setCellValue(persons.get(i).getName());
+            cell = row.createCell(1);
+            cell.setCellValue(persons.get(i).getrNumber());
+            cell = row.createCell(2);
+            cell.setCellValue(persons.get(i).getGithubUrl());
         }
     }
 }

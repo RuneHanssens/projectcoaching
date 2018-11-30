@@ -9,8 +9,7 @@ import java.io.FileOutputStream;
 import java.util.ArrayList;
 
 public class Pdf {
-    public static Document generateFile(ArrayList<Person> persons) throws FileNotFoundException, DocumentException {
-        Document document = new Document();
+    public static Document generateFile(ArrayList<Person> persons, Document document) throws FileNotFoundException, DocumentException {
         PdfWriter.getInstance(document, new FileOutputStream("Hello.pdf"));
         document.open();
         Font font = FontFactory.getFont(FontFactory.COURIER, 16, BaseColor.BLACK);

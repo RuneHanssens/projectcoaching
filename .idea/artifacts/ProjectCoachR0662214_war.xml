@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" build-on-make="true" name="ProjectCoachR0662214:war">
+    <output-path>$PROJECT_DIR$/out/artifacts/ProjectCoachR0662214_war</output-path>
+    <root id="archive" name="ProjectCoachR0662214_war.war">
+      <element id="artifact" artifact-name="ProjectCoach:war exploded" />
+    </root>
+  </artifact>
+</component>

@@ -22,7 +22,8 @@ public class DownloadImageHandler extends AbstractRequestHandler{
     public void handleRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String key = (String)request.getParameter("key");
         //String path = "D:/School/5/Coaching/ProjectCoach/web/uploads/" + key;
-        String path = request.getServletContext().getRealPath("\\uploads\\" + key);
+        //String path = request.getServletContext().getRealPath("\\uploads\\" + key);
+        String path = key;
         ServletContext context = request.getServletContext();
         String mimeType = context.getMimeType(path);
         File downloadFile = new File(path);
